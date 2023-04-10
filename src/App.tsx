@@ -1,21 +1,32 @@
 import {Button} from 'antd'
-import React, {DragEventHandler, MouseEventHandler, useRef} from 'react'
+import React, {DragEventHandler, MouseEventHandler, useEffect, useRef} from 'react'
+import {useLoaderData} from "react-router-dom";
 import {BlockItem} from "./components/Block";
 import {PanerHeader} from './components/PanelHeader'
 import {Setter} from "./components/Setter";
 import {registerConfig} from './core/registerConfig'
+import {useFieldListStore} from "./store/useFieldListStore";
 import {useMarkLineStore} from "./store/useMarklineStore";
 import {useScaleStore} from "./store/useScaleStore";
 import {useSchemaStore} from "./store/useSchemaStore";
-import type {Block, Material} from './types/type'
+import type {Block, Material, Schema} from './types/type'
 import {StepCounter} from './components/StepCounter'
 import {PreviewModal} from './components/PreviewModal'
 
 function App() {
+    const loaderData = useLoaderData() as { labelField: Schema, fieldList: Array<{ label: string, value: string }> }
     const currentMaterial = useRef<Material>()
+    const [setFieldList] = useFieldListStore((state) => [state.setFieldList])
     const [markLine] = useMarkLineStore((state) => [state.markLine])
     const [scale, resetScale] = useScaleStore((state) => [state.scale, state.resetScale])
     const [schema, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore((state) => [state.schema, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
+
+    //初始化字段列表以及标签信息
+    useEffect(() => {
+        setFieldList(loaderData.fieldList)
+        updateSchema(loaderData.labelField)
+    }, [])
+
     const wrapStyle = {
         border: '1px dashed #e8e8e8',
         width: `${schema.container.width}mm`,
