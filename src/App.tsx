@@ -1,5 +1,6 @@
 import {Button} from 'antd'
-import {DragEventHandler, MouseEventHandler, useRef} from 'react'
+import React, {DragEventHandler, MouseEventHandler, useRef} from 'react'
+import {BlockItem} from "./components/Block";
 import {PanerHeader} from './components/PanelHeader'
 import {registerConfig} from './core/registerConfig'
 import {useMarkLineStore} from "./store/useMarklineStore";
@@ -119,7 +120,7 @@ function App() {
                         style={wrapStyle}
                         className="bg-white relative overflow-hidden"
                     >
-                        {schema.blocks.map((block, index) => <div key={index}>111</div>)}
+                        {schema.blocks.map((block, index) => <BlockItem key={index} block={block}/>)}
                         {markLine.x !== 0 && (
                             <div style={{left: markLine.x}}
                                  className="absolute top-0 bottom-0 border-1 border-l-dashed border-blue"
