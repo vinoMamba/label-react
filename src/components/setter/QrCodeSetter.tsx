@@ -1,17 +1,18 @@
-import { Form, InputNumber } from "antd"
-import {useSchemaStore} from "../../store/useSchemaStore";
+import { Form, InputNumber } from 'antd'
+import { useSchemaStore } from '../../store/useSchemaStore'
 
 export const QrCodeSetter = () => {
-  const [currentBlock, updateBlock] = useSchemaStore((state) => [state.currentBlock, state.updateBlock])
+  const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const valueChange = (value: number | null) => {
-    if (!value) return
+    if (!value)
+      return
     updateBlock({
       ...currentBlock!,
       options: {
         ...currentBlock!.options,
         width: value,
-        height: value
-      }
+        height: value,
+      },
     })
   }
   return (

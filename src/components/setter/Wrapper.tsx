@@ -1,6 +1,6 @@
-import { FC } from "react"
+import type { FC } from 'react'
 
-type Props = {
+interface Props {
   children: React.ReactNode
   title: string
 }

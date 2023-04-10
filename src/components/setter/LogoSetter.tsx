@@ -1,27 +1,29 @@
-import { Form, InputNumber } from "antd"
-import {useSchemaStore} from "../../store/useSchemaStore";
+import { Form, InputNumber } from 'antd'
+import { useSchemaStore } from '../../store/useSchemaStore'
 
 export const LogoSetter = () => {
-  const [currentBlock, updateBlock] = useSchemaStore((state) => [state.currentBlock, state.updateBlock])
+  const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const widthChange = (value: number | null) => {
-    if (!value) return
+    if (!value)
+      return
     updateBlock({
       ...currentBlock!,
       options: {
         ...currentBlock!.options,
         width: value,
-      }
+      },
     })
   }
 
   const heightChange = (value: number | null) => {
-    if (!value) return
+    if (!value)
+      return
     updateBlock({
       ...currentBlock!,
       options: {
         ...currentBlock!.options,
-        height: value
-      }
+        height: value,
+      },
     })
   }
   return (

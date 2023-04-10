@@ -1,15 +1,15 @@
-import { Form, Checkbox, Select } from "antd"
-import { useState } from "react"
-import {fontSizes, positions} from "../../shared";
-import {useFieldListStore} from "../../store/useFieldListStore";
-import {useSchemaStore} from "../../store/useSchemaStore";
+import { Checkbox, Form, Select } from 'antd'
+import { useState } from 'react'
+import { fontSizes, positions } from '../../shared'
+import { useFieldListStore } from '../../store/useFieldListStore'
+import { useSchemaStore } from '../../store/useSchemaStore'
 
 export const FieldSetter = () => {
   const [position, setPosition] = useState(false)
-  const [fieldList] = useFieldListStore((state) => [state.fieldList])
-  const [currentBlock, updateBlock] = useSchemaStore((state) => [state.currentBlock, state.updateBlock])
+  const [fieldList] = useFieldListStore(state => [state.fieldList])
+  const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const handleFieldChange = (value: { value: string; label: React.ReactNode }) => {
-    //业务代码逻辑
+    // 业务代码逻辑
     if (value.label === '所在位置') {
       setPosition(true)
     }
@@ -18,8 +18,8 @@ export const FieldSetter = () => {
       props: {
         ...currentBlock!.props,
         fieldValue: value.value,
-        fieldName: value.label
-      }
+        fieldName: value.label,
+      },
     })
   }
   const handlePositionChange = (value: { value: string; label: React.ReactNode }) => {
@@ -27,8 +27,8 @@ export const FieldSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        position: value.value
-      }
+        position: value.value,
+      },
     })
   }
   const handleFontSizeChange = (value: { value: string; label: React.ReactNode }) => {
@@ -36,8 +36,8 @@ export const FieldSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        fontSize: value.value
-      }
+        fontSize: value.value,
+      },
     })
   }
   const handleBoldChange = (checkedValue: boolean) => {
@@ -45,8 +45,8 @@ export const FieldSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        bold: checkedValue
-      }
+        bold: checkedValue,
+      },
     })
   }
   const handleHideTitleChange = (checkedValue: boolean) => {
@@ -54,8 +54,8 @@ export const FieldSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        hideTitle: checkedValue
-      }
+        hideTitle: checkedValue,
+      },
     })
   }
   return (
@@ -70,8 +70,8 @@ export const FieldSetter = () => {
             options={fieldList} />
         </Form.Item>
         {
-          position &&
-          <Form.Item label="打印位置">
+          position
+          && <Form.Item label="打印位置">
             <Select
               labelInValue={true}
               value={currentBlock!.props.position}

@@ -1,16 +1,16 @@
-import { Checkbox, Form, Select, Input } from "antd"
-import {fontSizes} from "../../shared";
-import {useSchemaStore} from "../../store/useSchemaStore";
+import { Checkbox, Form, Input, Select } from 'antd'
+import { fontSizes } from '../../shared'
+import { useSchemaStore } from '../../store/useSchemaStore'
 
 export const CustomTextSetter = () => {
-  const [currentBlock, updateBlock] = useSchemaStore((state) => [state.currentBlock, state.updateBlock])
+  const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateBlock({
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        text: e.target.value
-      }
+        text: e.target.value,
+      },
     })
   }
   const handleFontSizeChange = (value: { value: string; label: React.ReactNode }) => {
@@ -18,8 +18,8 @@ export const CustomTextSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        fontSize: value.value
-      }
+        fontSize: value.value,
+      },
     })
   }
   const handleBoldChange = (checkedValue: boolean) => {
@@ -27,8 +27,8 @@ export const CustomTextSetter = () => {
       ...currentBlock!,
       props: {
         ...currentBlock!.props,
-        bold: checkedValue
-      }
+        bold: checkedValue,
+      },
     })
   }
   return (

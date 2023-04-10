@@ -1,15 +1,15 @@
-import {FC} from "react"
+import type { FC } from 'react'
 
-type Props = {
-    width: number
-    height: number
-    url: string
+interface Props {
+  width: number
+  height: number
+  url: string
 }
 
 export const LogoRender: FC<Props> = (props) => {
-    const url = props.url
-    console.log(url)
-    return (
+  const url = props.url
+  console.log(url)
+  return (
         <img src={url} alt="" width={props.width || 96} height={props.height || 32}/>
-    )
+  )
 }
