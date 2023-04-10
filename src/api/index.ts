@@ -25,7 +25,7 @@ export const updateLabelInfo = (auth: string, schema: Schema) => {
     labelHeight: '100',
     showField: '0',
   }
-  return fetch(`/api/asset/label`, {
+  return fetch('/api/asset/label', {
     method: 'POST',
     headers: createHeaders(auth),
     body: JSON.stringify(data),

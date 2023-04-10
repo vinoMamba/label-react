@@ -48,9 +48,6 @@ export interface DragState {
   }
 }
 
-/**
- * 业务类型
- */
 export interface labelInfo {
   assetInfoId: string;
   qrCodeUrl: string;
@@ -58,4 +55,13 @@ export interface labelInfo {
     fieldName: string;
     fieldValue: string;
   }>
+}
+
+export interface Label {
+  fontSize: number
+  labelField: string
+  labelHeight: number
+  labelWidth: number
+  labelType: number
+  showField: number
 }

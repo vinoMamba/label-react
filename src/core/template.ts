@@ -1,4 +1,4 @@
-export  const template =`
+export const template = `
 <!DOCTYPE html>
 <html lang="zh">
 

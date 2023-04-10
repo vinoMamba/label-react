@@ -1,71 +1,70 @@
-import {Checkbox, Form, Select} from 'antd'
-import {useEffect, useState} from 'react'
-import {fontSizes, positions} from '../../shared'
-import {useFieldListStore} from '../../store/useFieldListStore'
-import {useSchemaStore} from '../../store/useSchemaStore'
+import { Checkbox, Form, Select } from 'antd'
+import { useEffect, useState } from 'react'
+import { fontSizes, positions } from '../../shared'
+import { useFieldListStore } from '../../store/useFieldListStore'
+import { useSchemaStore } from '../../store/useSchemaStore'
 
 export const FieldSetter = () => {
+  const [fieldList] = useFieldListStore(state => [state.fieldList])
+  const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
+  const [position, setPosition] = useState(false)
+  useEffect(() => {
+    setPosition(currentBlock?.props.fieldValue === 'position')
+  }, [currentBlock])
 
-    const [fieldList] = useFieldListStore(state => [state.fieldList])
-    const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
-    const [position, setPosition] = useState(false)
-    useEffect(() => {
-        setPosition(currentBlock?.props.fieldValue === 'position')
-    }, [currentBlock])
-
-    const handleFieldChange = (value: { value: string; label: React.ReactNode }) => {
-        // 业务代码逻辑
-        setPosition(value.label === '所在位置')
-        updateBlock({
-            ...currentBlock!,
-            props: {
-                ...currentBlock!.props,
-                fieldValue: value.value,
-                fieldName: value.label,
-            },
-        })
-    }
-    const handlePositionChange = (value: { value: string; label: React.ReactNode }) => {
-        updateBlock({
-            ...currentBlock!,
-            props: {
-                ...currentBlock!.props,
-                position: value.value,
-            },
-        })
-    }
-    const handleFontSizeChange = (value: { value: string; label: React.ReactNode }) => {
-        updateBlock({
-            ...currentBlock!,
-            props: {
-                ...currentBlock!.props,
-                fontSize: value.value,
-            },
-        })
-    }
-    const handleBoldChange = (checkedValue: boolean) => {
-        updateBlock({
-            ...currentBlock!,
-            props: {
-                ...currentBlock!.props,
-                bold: checkedValue,
-            },
-        })
-    }
-    const handleHideTitleChange = (checkedValue: boolean) => {
-        updateBlock({
-            ...currentBlock!,
-            props: {
-                ...currentBlock!.props,
-                hideTitle: checkedValue,
-            },
-        })
-    }
-    return (
+  const handleFieldChange = (value: { value: string; label: React.ReactNode }) => {
+    // 业务代码逻辑
+    setPosition(value.label === '所在位置')
+    updateBlock({
+      ...currentBlock!,
+      props: {
+        ...currentBlock!.props,
+        fieldValue: value.value,
+        fieldName: value.label,
+      },
+    })
+  }
+  const handlePositionChange = (value: { value: string; label: React.ReactNode }) => {
+    updateBlock({
+      ...currentBlock!,
+      props: {
+        ...currentBlock!.props,
+        position: value.value,
+      },
+    })
+  }
+  const handleFontSizeChange = (value: { value: string; label: React.ReactNode }) => {
+    updateBlock({
+      ...currentBlock!,
+      props: {
+        ...currentBlock!.props,
+        fontSize: value.value,
+      },
+    })
+  }
+  const handleBoldChange = (checkedValue: boolean) => {
+    updateBlock({
+      ...currentBlock!,
+      props: {
+        ...currentBlock!.props,
+        bold: checkedValue,
+      },
+    })
+  }
+  const handleHideTitleChange = (checkedValue: boolean) => {
+    updateBlock({
+      ...currentBlock!,
+      props: {
+        ...currentBlock!.props,
+        hideTitle: checkedValue,
+      },
+    })
+  }
+  return (
         <div>
             <h6 className="setter-h6">字段信息</h6>
             <Form>
-                <Form.Item label="字段名称" rules={[{required: true}]}>
+                <Form.Item label="字段名称" rules={[{ required: true }]}>
                     <Select
                         labelInValue={true}
                         value={currentBlock!.props.fieldValue}
@@ -84,7 +83,7 @@ export const FieldSetter = () => {
                         />
                     </Form.Item>
                 }
-                <Form.Item label="字段大小" rules={[{required: true}]}>
+                <Form.Item label="字段大小" rules={[{ required: true }]}>
                     <Select
                         labelInValue={true}
                         value={currentBlock!.props.fontSize}
@@ -106,5 +105,5 @@ export const FieldSetter = () => {
                 </Form.Item>
             </Form>
         </div>
-    )
+  )
 }

@@ -1,24 +1,24 @@
-import {Button, Modal} from "antd";
-import React, {useState} from "react";
-import {useSchemaStore} from "../store/useSchemaStore";
-import {PrintLabel} from "./print/PrintLabel";
+import { Button, Modal } from 'antd'
+import React, { useState } from 'react'
+import { useSchemaStore } from '../store/useSchemaStore'
+import { PrintLabel } from './print/PrintLabel'
 
 export const PreviewModal = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [schema] = useSchemaStore(state => [state.schema])
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const style = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-    const width = `${schema.container.width + 25}mm`;
-    return (
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [schema] = useSchemaStore(state => [state.schema])
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+  const style = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+  const width = `${schema.container.width + 25}mm`
+  return (
         <>
             <Button type="primary" onClick={showModal}>
                 预览
@@ -37,5 +37,5 @@ export const PreviewModal = () => {
                 <PrintLabel schema={schema}/>
             </Modal>
         </>
-    );
+  )
 }
