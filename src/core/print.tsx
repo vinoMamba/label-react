@@ -1,6 +1,7 @@
 import { renderToString } from 'react-dom/server'
 import type { Label, Schema, labelInfo } from '../types/type'
 import { PrintLabel } from '../components/print/PrintLabel'
+import { TemplateOne } from '../components/print/TemplateOne'
 import { template } from './template'
 
 export interface CreateLabelParams {
@@ -15,7 +16,7 @@ export const createLabelTemplate = (p: CreateLabelParams): string => {
   const schema = schemaStr ? JSON.parse(schemaStr) : {}
   switch (labelType) {
     case 1:
-      return template
+      return createTemplateOne(labelInfo, logoUrl as string, label)
     case 2:
       return template
     case 3:
@@ -25,6 +26,21 @@ export const createLabelTemplate = (p: CreateLabelParams): string => {
     default:
       return template
   }
+}
+function createTemplateOne(labelList: labelInfo[], logoUrl: string, label: Label) {
+  console.log(labelList)
+  const List = () => <>{
+    labelList.map((item) => {
+      return (<TemplateOne
+        key={item.assetInfoId}
+        logoUrl={logoUrl}
+        width={label.labelWidth}
+        height={label.labelHeight} />)
+    })
+  }</>
+  const html = renderToString(<List />)
+  const result = template.replace('{{labelContent}}', html)
+  return result
 }
 
 // 下面代码理不理解不重要，因为后端返回的数据格式奇奇怪怪的，所以这里要做一些处理。想优雅一点去找后端处理
