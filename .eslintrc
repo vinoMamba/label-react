@@ -1,0 +1,8 @@
+// https://github.com/antfu/eslint-config 
+{
+  "extends": "@antfu",
+  "rules": {
+    "no-console": "off",
+    "curly": "off"
+  }
+}

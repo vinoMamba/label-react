@@ -1,0 +1,50 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 16px;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+body {
+  background-color: #f2f3f5;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  font-size: 4px;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #f5f5f5;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
