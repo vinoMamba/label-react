@@ -81,7 +81,13 @@ function App() {
     }
 
     function resetPanelState() {
-
+        updateContainer({
+            width: 100,
+            height: 50,
+            top: 0,
+            left: 0,
+        })
+        resetScale()
     }
 
     return (
