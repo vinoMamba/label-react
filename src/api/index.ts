@@ -32,7 +32,7 @@ export const updateLabelInfo = (url: string, auth: string, schema: Schema) => {
   })
 }
 
-export const printLabel = (url: string, auth: string, ids: string) => fetch(`${url}/asset/label/export/?downloadLogoIds=${ids}&downloadType=1`, {
+export const printLabel = (auth: string, ids: string) => fetch(`/api/asset/label/export/?downloadLogoIds=${ids}&downloadType=1`, {
   method: 'GET',
   headers: createHeaders(auth),
 })
