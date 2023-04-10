@@ -1,4 +1,4 @@
-import { QrCodePreview } from '../components/Previews'
+import { CustomTextPreview, FieldPreview, LogoPreview, QrCodePreview } from '../components/Previews'
 import type { Material } from '../types/type'
 
 function createMaterial() {
@@ -23,5 +23,43 @@ registerConfig.registerMaterial({
   renderInstance: () => (<div>1111</div>),
   props: {
     value: '',
+  },
+})
+
+registerConfig.registerMaterial({
+  type: 'field',
+  name: '字段名称',
+  preview: FieldPreview,
+  renderInstance: () => (<div>1111</div>),
+  props: {
+    fontSize: 16,
+    bold: false,
+    hideTitle: false,
+    fieldValue: '',
+    fieldName: '',
+    position: 0,
+  },
+})
+
+registerConfig.registerMaterial({
+  type: 'logo',
+  name: '公司Logo',
+  preview: LogoPreview,
+  renderInstance: () => (<div>1111</div>),
+  props: {
+    url: '',
+  },
+})
+
+registerConfig.registerMaterial({
+  type: 'customText',
+  name: '自定义文本框',
+  preview: CustomTextPreview,
+  renderInstance: () => (<div>1111</div>),
+  props: {
+    fontSize: 16,
+    bold: false,
+    hideTitle: false,
+    text: '',
   },
 })

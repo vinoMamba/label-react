@@ -1,5 +1,8 @@
 import type { FC } from 'react'
 import qrCode from '../assets/qr-code-icon.svg'
+import logo from '../assets/logo-icon.svg'
+import field from '../assets/field-icon.svg'
+import customText from '../assets/custom-field-icon.svg'
 
 interface Props {
   icon: string
@@ -17,3 +20,6 @@ const Container: FC<Props> = (props) => {
   )
 }
 export const QrCodePreview = () => <Container icon={qrCode}>资产二维码</Container>
+export const FieldPreview = () => <Container icon={field}>字段名称：XXXX</Container>
+export const LogoPreview = () => <Container icon={logo}>公司Logo</Container>
+export const CustomTextPreview = () => <Container icon={customText}>自定义文本框</Container>
