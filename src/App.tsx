@@ -2,6 +2,7 @@ import {Button} from 'antd'
 import React, {DragEventHandler, MouseEventHandler, useRef} from 'react'
 import {BlockItem} from "./components/Block";
 import {PanerHeader} from './components/PanelHeader'
+import {Setter} from "./components/Setter";
 import {registerConfig} from './core/registerConfig'
 import {useMarkLineStore} from "./store/useMarklineStore";
 import {useScaleStore} from "./store/useScaleStore";
@@ -134,7 +135,7 @@ function App() {
                     </div>
                 </section>
                 <section className="w-250 flex flex-col justify-between p-16">
-
+                    <Setter/>
                 </section>
             </div>
             <footer className="bg-white h-64 flex items-center justify-end px-72">
