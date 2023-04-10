@@ -21,11 +21,13 @@ export const routes = createBrowserRouter([
                 return {
                     labelField,
                     fieldList,
+                    auth,
                 }
             } else {
                 return {
                     labelField: labelSchema,
                     fieldList: [],
+                    auth: '',
                 }
             }
         },

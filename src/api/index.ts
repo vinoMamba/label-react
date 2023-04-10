@@ -16,7 +16,7 @@ export const getLabelInfo = (auth: string) => fetch('/api/asset/label/label_info
   headers: createHeaders(auth),
 })
 
-export const updateLabelInfo = (url: string, auth: string, schema: Schema) => {
+export const updateLabelInfo = (auth: string, schema: Schema) => {
   const data = {
     labelType: '4',
     labelField: JSON.stringify(schema),
@@ -25,7 +25,7 @@ export const updateLabelInfo = (url: string, auth: string, schema: Schema) => {
     labelHeight: '100',
     showField: '0',
   }
-  return fetch(`${url}/asset/label`, {
+  return fetch(`/api/asset/label`, {
     method: 'POST',
     headers: createHeaders(auth),
     body: JSON.stringify(data),

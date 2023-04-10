@@ -9,3 +9,20 @@ export const labelSchema: Schema = {
   },
   blocks: [],
 }
+
+export const validateSchema = (schema: Schema) => {
+  let valid = true
+  const { blocks } = schema
+  blocks.forEach(block => {
+    if (block.type === 'field') {
+      const { props } = block
+      for (let key in props) {
+        if (props[key] === undefined || props[key] === null || props[key] === '') {
+          valid = false
+          break
+        }
+      }
+    }
+  })
+  return valid
+}
