@@ -28,13 +28,14 @@ export const createLabelTemplate = (p: CreateLabelParams): string => {
   }
 }
 function createTemplateOne(labelList: labelInfo[], logoUrl: string, label: Label) {
-  console.log(labelList)
   const List = () => <>{
     labelList.map((item) => {
       return (<TemplateOne
+        qrCodeUrl={item.qrCodeUrl}
         key={item.assetInfoId}
         logoUrl={logoUrl}
         width={label.labelWidth}
+        list ={item.assetLabelFieldList}
         height={label.labelHeight} />)
     })
   }</>

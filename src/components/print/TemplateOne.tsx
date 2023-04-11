@@ -1,25 +1,60 @@
 import type { FC } from 'react'
 interface Props {
   logoUrl: string
+  qrCodeUrl: string
   width: number
   height: number
+  list: Array<{
+    fieldName: string
+    fieldValue: string
+  }>
 }
 export const TemplateOne: FC<Props> = (props) => {
-  const { logoUrl, height } = props
+  const { qrCodeUrl, height, list, logoUrl } = props
   const style = {
-    border: '1px solid #d4d4d4',
+    padding: '4px',
     position: 'relative',
     width: `${props.width}mm`,
     height: `${props.height}mm`,
     backgroundColor: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+  }
+  const qrCodeWrapperStyle = {
+    width: `${height - 5}mm`,
+    height: `${height - 5}mm`,
+    flexShrink: 0,
+  }
+  const rightStyle = {
+    height: `${height - 5}mm`,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  }
+  const logoStyle = {
+    width: `${height}mm`,
+    height: `${height / 4 - 5}mm`,
   }
   return (
     <section
-      className='flex'
       style={style as any} >
-      <img src={logoUrl} alt="" width={height} height={height} />
-      <div>
-
+      <div style={qrCodeWrapperStyle}>
+          <img src={qrCodeUrl} alt="" width='100%' height='100%' />
+      </div>
+      <div style={rightStyle as any}>
+        {list.map((item) => {
+          return (
+          <div key={item.fieldName}>
+            {logoUrl
+            && <div style={logoStyle}>
+              <img src={logoUrl} alt="" width='100%' height='100%' />
+            </div>
+            }
+            <span>{item.fieldName}</span>
+            <span>{item.fieldValue}</span>
+          </div>
+          )
+        })}
       </div>
     </section>
   )

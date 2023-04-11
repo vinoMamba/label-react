@@ -19,7 +19,6 @@ export const template = `
       }
 
       section {
-        border: 1px solid black;
         page-break-after: always;
         background-color: white;
       }
