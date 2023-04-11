@@ -2,6 +2,7 @@ import { renderToString } from 'react-dom/server'
 import type { Label, Schema, labelInfo } from '../types/type'
 import { PrintLabel } from '../components/print/PrintLabel'
 import { TemplateOne } from '../components/print/TemplateOne'
+import { TemplateTwo } from '../components/print/TemplateTwo'
 import { template } from './template'
 
 export interface CreateLabelParams {
@@ -18,14 +19,30 @@ export const createLabelTemplate = (p: CreateLabelParams): string => {
     case 1:
       return createTemplateOne(labelInfo, logoUrl as string, label)
     case 2:
-      return template
+      return createTemplateTwo(labelInfo, logoUrl as string, label)
     case 3:
-      return template
+      return createTemplateTwo(labelInfo, logoUrl as string, label)
     case 4:
       return createCustomLabel(labelInfo, logoUrl as string, schema)
     default:
       return template
   }
+}
+function createTemplateTwo(labelList: labelInfo[], logoUrl: string, label: Label) {
+  const List = () => <>{
+    labelList.map((item) => {
+      return (<TemplateTwo
+        type={label.labelType}
+        qrCodeUrl={item.qrCodeUrl}
+        key={item.assetInfoId}
+        width={label.labelWidth}
+        fieldValue={item.assetLabelFieldList[0]?.fieldValue}
+        />)
+    })
+  }</>
+  const html = renderToString(<List />)
+  const result = template.replace('{{labelContent}}', html)
+  return result
 }
 function createTemplateOne(labelList: labelInfo[], logoUrl: string, label: Label) {
   const List = () => <>{
