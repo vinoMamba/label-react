@@ -9,7 +9,6 @@ export default defineConfig(({
   const env = loadEnv(mode, process.cwd())
   return {
     server: {
-      port: 3000,
       proxy: {
         '/api': {
           target: env.VITE_API_URL,
