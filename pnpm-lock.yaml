@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/icons': ^5.0.1
   '@antfu/eslint-config': ^0.34.1
   '@types/qrcode': ^1.5.0
   '@types/react': ^18.0.28
@@ -19,6 +20,7 @@ specifiers:
   zustand: ^4.3.7
 
 dependencies:
+  '@ant-design/icons': 5.0.1_biqbaboplfbrettd7655fr4n2y
   antd: 5.4.0_biqbaboplfbrettd7655fr4n2y
   qrcode: 1.5.1
   react: 18.2.0
