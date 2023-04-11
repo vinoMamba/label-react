@@ -47,11 +47,10 @@ export const LogoSetter = () => {
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div style={{ marginTop: 8 }}>上传图片</div>
     </div>
   )
   async function beforeUpload(file: RcFile) {
-    console.log(file.size)
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
     if (!isJpgOrPng) {
       message.error('仅支持JPG/PNG格式图片')
@@ -104,6 +103,7 @@ export const LogoSetter = () => {
             >
             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
           </Upload>
+          <p className='text-14 text-gray'>支持上传JPG、PNG等格式图片，文件不大于5M</p>
         </Form.Item>
       </Form>
     </div>

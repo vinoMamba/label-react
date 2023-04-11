@@ -7,8 +7,7 @@ interface Props {
 }
 
 export const LogoRender: FC<Props> = (props) => {
-  const url = props.url
-  console.log(url)
+  const url = props.url || import.meta.env.VITE_LOGO_URL
   return (
         <img src={url} alt="" width={props.width || 96} height={props.height || 32}/>
   )
