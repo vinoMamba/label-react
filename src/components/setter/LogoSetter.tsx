@@ -10,6 +10,7 @@ export const LogoSetter = () => {
   const action = `${import.meta.env.VITE_API_URL}/upms/upload/multi`
   const headers = {
     Authorization: `Bearer ${search.split('=')[1]}`,
+    Accept: 'application/json, text/plain, */*',
   }
   const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const widthChange = (value: number | null) => {
@@ -70,15 +71,14 @@ export const LogoSetter = () => {
       getBase64(info.file.originFileObj as RcFile, (url) => {
         setLoading(false)
         setImageUrl(url)
-        updateBlock({
-          ...currentBlock!,
-          props: {
-            ...currentBlock!.props,
-            url,
-          },
-        })
       })
-      console.log(info)
+      updateBlock({
+        ...currentBlock!,
+        props: {
+          ...currentBlock!.props,
+          url: info.file.response.data[0].url || '',
+        },
+      })
     }
   }
   return (
@@ -93,7 +93,7 @@ export const LogoSetter = () => {
         </Form.Item>
         <Form.Item>
           <Upload
-            name="avatar"
+            name="file"
             listType="picture-card"
             className="overflow-hidden"
             showUploadList={false}
