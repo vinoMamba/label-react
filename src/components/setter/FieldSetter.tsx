@@ -1,10 +1,12 @@
 import { Checkbox, Form, Select } from 'antd'
 import { useEffect, useState } from 'react'
-import { fontSizes, positions } from '../../shared'
+import { fontSizes } from '../../shared'
 import { useFieldListStore } from '../../store/useFieldListStore'
 import { useSchemaStore } from '../../store/useSchemaStore'
+import { useMaxLevelStore } from '../../store/useMaxLevelStore'
 
 export const FieldSetter = () => {
+  const [positionOptions] = useMaxLevelStore(state => [state.positionOptions])
   const [fieldList] = useFieldListStore(state => [state.fieldList])
   const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
   const [position, setPosition] = useState(false)
@@ -78,7 +80,7 @@ export const FieldSetter = () => {
                         <Select
                             labelInValue={true}
                             value={currentBlock!.props.position}
-                            options={positions}
+                            options={positionOptions}
                             onChange={handlePositionChange}
                         />
                     </Form.Item>

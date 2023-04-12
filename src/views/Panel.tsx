@@ -15,6 +15,7 @@ import { useSchemaStore } from '../store/useSchemaStore'
 import type { Block, Material, Schema } from '../types/type'
 import { StepCounter } from '../components/StepCounter'
 import { PreviewModal } from '../components/PreviewModal'
+import { useMaxLevelStore } from '../store/useMaxLevelStore'
 
 export const Panel = () => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -22,7 +23,9 @@ export const Panel = () => {
     labelField: Schema
     fieldList: Array<{ label: string; value: string }>
     auth: string
+    maxLevel: number
   }
+  const [setMaxLevel] = useMaxLevelStore(state => [state.setMaxLevel])
   const currentMaterial = useRef<Material>()
   const [setFieldList] = useFieldListStore(state => [state.setFieldList])
   const [markLine] = useMarkLineStore(state => [state.markLine])
@@ -33,6 +36,7 @@ export const Panel = () => {
   useEffect(() => {
     setFieldList(loaderData.fieldList)
     updateSchema(loaderData.labelField)
+    setMaxLevel(loaderData.maxLevel)
   }, [])
 
   const wrapStyle = {

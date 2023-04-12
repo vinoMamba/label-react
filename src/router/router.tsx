@@ -26,10 +26,12 @@ export const routes = createHashRouter([
             const { data: labelData } = await label.json()
             const labelFieldStr = labelData?.labelField as string
             const labelField = labelFieldStr ? JSON.parse(labelFieldStr) : labelSchema
+            const maxLevel = labelData?.maxLevel || 0
             return {
               labelField,
               fieldList,
               auth,
+              maxLevel,
             }
           }
           else {
