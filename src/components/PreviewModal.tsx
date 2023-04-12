@@ -30,6 +30,7 @@ export const PreviewModal = () => {
                 centered={true}
                 title="打印预览"
                 open={isModalOpen}
+                onCancel={handleOk}
                 footer={
                     <Button type="primary" onClick={handleOk}>确定</Button>
                 }

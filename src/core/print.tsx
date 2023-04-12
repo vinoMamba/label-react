@@ -86,6 +86,7 @@ function createCustomLabel(labelList: labelInfo[], logoUrl: string, schema: Sche
                 },
               }
             case 'logo':
+              console.log(block)
               return {
                 ...block,
                 props: {
@@ -98,7 +99,6 @@ function createCustomLabel(labelList: labelInfo[], logoUrl: string, schema: Sche
           }
         }),
       }
-      console.log(neSchema)
       return (<PrintLabel key={label.assetInfoId} schema={neSchema} />)
     })
   }</>

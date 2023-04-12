@@ -45,7 +45,7 @@ export const PrintLabel: FC<Props> = (props) => {
                     fieldValue={block.props.fieldValue}
                 />
       case 'logo':
-        return <LogoRender url={block.props.url} {...block.options} {...block.props} />
+        return <LogoRender url={block.props.url} width={block.options.width} height={block.options.height} />
       case 'customText':
         return <TextRender
                     fontSize={block.props.fontSize}
