@@ -36,7 +36,7 @@ export const Setter = () => {
                 }
             </div>
             {currentBlock && (
-                <Button type="primary" danger={true} onClick={handleDelete} className="mb-80" >
+                <Button type="primary" danger={true} onClick={handleDelete} className="mb-300" >
                     删除控件
                 </Button>
             )}

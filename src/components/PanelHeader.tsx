@@ -20,7 +20,7 @@ export const PanerHeader = () => {
     })
   }
   return (
-    <header className='h-64 border border-b-1 border-b-solid border-b-#ddd flex justify-start items-center px-16'>
+    <header className='h-48 border border-b-1 border-b-solid border-b-#ddd flex justify-start items-center px-16'>
       <span className="flex items-center">
         <i className="text-red-500 mr-4">*</i>打印标签尺寸大小：
       </span>

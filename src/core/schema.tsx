@@ -23,6 +23,15 @@ export const validateSchema = (schema: Schema) => {
         }
       }
     }
+    if (block.type === 'customText') {
+      const { props } = block
+      for (const key in props) {
+        if (props[key] === undefined || props[key] === null || props[key] === '') {
+          valid = false
+          break
+        }
+      }
+    }
   })
   return valid
 }

@@ -15,7 +15,7 @@ export const FieldRender: FC<Props> = (props) => {
               fontSize: `${props.fontSize || 14}px`,
               fontWeight: props.bold ? 'bold' : 'normal',
             }}
-            className="p-0 m-0 overflow-hidden whitespace-nowrap"
+            className="p-0 m-0 overflow-hidden whitespace-nowrap cursor-default"
         >
           {props.printFieldValue
             ? props.hideTitle ? 'XXXXXX' : `${props.fieldName || '字段名称'}：${props.printFieldValue || 'XXXXXX'}`

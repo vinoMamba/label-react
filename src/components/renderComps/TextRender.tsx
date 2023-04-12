@@ -14,7 +14,7 @@ export const TextRender: FC<Props> = (props) => {
   return (
         <span
             style={style}
-            className="p-0 m-0 overflow-hidden whitespace-nowrap"
+            className="p-0 m-0 overflow-hidden whitespace-nowrap cursor-default"
         >
             {props.text || '自定义文本内容'}
         </span>

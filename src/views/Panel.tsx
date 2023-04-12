@@ -40,7 +40,7 @@ export const Panel = () => {
   }, [])
 
   const wrapStyle = {
-    border: '1px dashed #e8e8e8',
+    border: '1px solid gray',
     width: `${schema.container.width}mm`,
     height: `${schema.container.height}mm`,
     transform: `scale(${scale}) translate(${schema.container.left}px,${schema.container.top}px)`,
