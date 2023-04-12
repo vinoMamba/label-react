@@ -83,7 +83,7 @@ export const FieldSetter = () => {
                         />
                     </Form.Item>
                 }
-                <Form.Item label="字段大小" rules={[{ required: true }]}>
+                <Form.Item label="字体大小" rules={[{ required: true }]}>
                     <Select
                         labelInValue={true}
                         value={currentBlock!.props.fontSize}
