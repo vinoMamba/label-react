@@ -82,7 +82,7 @@ function createCustomLabel(labelList: labelInfo[], logoUrl: string, schema: Sche
                 ...block,
                 props: {
                   ...block.props,
-                  fieldValue: label.assetLabelFieldList.find(item => item.fieldName === block.props.fieldName)?.fieldValue,
+                  printFieldValue: label.assetLabelFieldList.find(item => item.fieldName === block.props.fieldName)?.fieldValue,
                 },
               }
             case 'logo':

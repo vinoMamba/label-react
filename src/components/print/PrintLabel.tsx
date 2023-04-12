@@ -37,6 +37,7 @@ export const PrintLabel: FC<Props> = (props) => {
                 />
       case 'field':
         return <FieldRender
+                    printFieldValue={block.props.printFieldValue}
                     fontSize={block.props.fontSize}
                     bold={block.props.bold}
                     hideTitle={block.props.hideTitle}
