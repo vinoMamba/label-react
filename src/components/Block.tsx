@@ -16,12 +16,14 @@ export const BlockItem: FC<Props> = (props) => {
     left: props.block.options.left,
   }
   const currentBlockId = useRef<number | null>(null)
-  const [schema, updateBlock, clearAllFocus, deleteBlock, setCurrentBlock] = useSchemaStore(state => [
+  const [schema, updateBlock, clearAllFocus, deleteBlock, setCurrentBlock, updateLabelHasChanged] = useSchemaStore(state => [
     state.schema,
     state.updateBlock,
     state.clearAllFocus,
     state.deleteBlock,
-    state.setCurrentBlock])
+    state.setCurrentBlock,
+    state.updateLabelHasChanged,
+  ])
   const blockRef = useRef<HTMLDivElement>(null)
   const setMarkLine = useMarkLineStore(state => state.setMarkLine)
   const drageState = useRef<DragState>()
@@ -41,25 +43,6 @@ export const BlockItem: FC<Props> = (props) => {
       },
     })
   }, [])
-
-  const handleMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation()
-    e.preventDefault()
-    if (!props.block.focus) {
-      currentBlockId.current = props.block.id
-      const newBlock = {
-        ...props.block,
-        focus: !props.block.focus,
-        options: {
-          ...props.block.options,
-        },
-      }
-      clearAllFocus()
-      updateBlock(newBlock)
-      setCurrentBlock(newBlock)
-    }
-    handleMouseMove(e)
-  }
 
   const handleMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
     const {
@@ -180,6 +163,25 @@ export const BlockItem: FC<Props> = (props) => {
     document.addEventListener('mouseup', blockMouseUp)
   }
 
+  const handleMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
+    updateLabelHasChanged(true)
+    e.stopPropagation()
+    e.preventDefault()
+    if (!props.block.focus) {
+      currentBlockId.current = props.block.id
+      const newBlock = {
+        ...props.block,
+        focus: !props.block.focus,
+        options: {
+          ...props.block.options,
+        },
+      }
+      clearAllFocus()
+      updateBlock(newBlock)
+      setCurrentBlock(newBlock)
+    }
+    handleMouseMove(e)
+  }
   /**
      * Delete 键，删除当前选中的元素
      * @param e

@@ -5,6 +5,7 @@ import type { Block, Schema } from '../types/type'
 interface State {
   schema: Schema
   currentBlock: Block | null
+  labelHasChanged: boolean
 }
 interface Actions {
   updateContainer: (container: Schema['container']) => void
@@ -14,16 +15,28 @@ interface Actions {
   deleteBlock: (blockId: number) => void
   pushBlock: (block: Block) => void
   clearAllFocus: () => void
+  updateLabelHasChanged: (labelHasChanged: boolean) => void
 }
 export const useSchemaStore = create<State & Actions>(set => ({
   schema: labelSchema,
   currentBlock: null,
-  updateContainer: (container: Schema['container']) => (set(state => ({
-    schema: {
-      ...state.schema,
-      container,
-    },
-  }))),
+  labelHasChanged: false,
+  updateLabelHasChanged: (labelHasChanged: boolean) => set({ labelHasChanged }),
+  updateContainer: (container: Schema['container']) => (set((state) => {
+    let labelHasChanged = state.labelHasChanged
+    if (
+      container.width !== state.schema.container.width
+      || container.height !== state.schema.container.height) {
+      labelHasChanged = true
+    }
+    return {
+      schema: {
+        ...state.schema,
+        container,
+      },
+      labelHasChanged,
+    }
+  })),
   updateSchema: (schema: Schema) => set({ schema }),
   setCurrentBlock: (block: Block | null) => set({ currentBlock: block }),
   pushBlock: block => (set(state => ({
@@ -31,6 +44,7 @@ export const useSchemaStore = create<State & Actions>(set => ({
       ...state.schema,
       blocks: [...state.schema.blocks, block],
     },
+    // labelHasChanged: true,
   }))),
 
   updateBlock: block => (set((state) => {
@@ -46,6 +60,7 @@ export const useSchemaStore = create<State & Actions>(set => ({
         ...state.schema,
         blocks,
       },
+      // labelHasChanged: true,
     }
   })),
 
@@ -61,6 +76,7 @@ export const useSchemaStore = create<State & Actions>(set => ({
         ...state.schema,
         blocks,
       },
+      labelHasChanged: true,
     }
   })),
 

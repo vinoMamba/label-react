@@ -28,8 +28,22 @@ export const Panel = () => {
   const currentMaterial = useRef<Material>()
   const [setFieldList] = useFieldListStore(state => [state.setFieldList])
   const [markLine] = useMarkLineStore(state => [state.markLine])
-  const [schema, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore(state => [state.schema, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
+  const [schema, labelHasChanged, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore(state => [state.schema, state.labelHasChanged, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
 
+  // 监听标签信息是否发生变化,发生变化则更新 URL 中 hasChanged 参数值 为 1
+  const firstRender = useRef(false)
+  useEffect(() => {
+    if (!firstRender.current) {
+      firstRender.current = true
+      return
+    }
+    if (labelHasChanged) {
+      const url = new URL(window.location.href)
+      const newHash = url.hash.replace(/hasChanged=\d/, 'hasChanged=1')
+      url.hash = newHash
+      window.history.replaceState(null, '', url.href)
+    }
+  }, [labelHasChanged])
   // 初始化字段列表以及标签信息
   useEffect(() => {
     setFieldList(loaderData.fieldList)

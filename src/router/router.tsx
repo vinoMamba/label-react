@@ -43,6 +43,7 @@ export const routes = createHashRouter([
           }
         },
         element: <Panel/>,
+        errorElement: <div className='w-screen h-screen flex items-center justify-center'>页面错误，请关闭页面重新操作</div>,
       },
       {
         path: '/print',
@@ -74,6 +75,7 @@ export const routes = createHashRouter([
           }
         },
         element: <Print />,
+        errorElement: <div className='w-screen h-screen flex items-center justify-center'>页面错误，请关闭页面重新操作</div>,
       },
       {
         path: 'preview',
@@ -105,6 +107,7 @@ export const routes = createHashRouter([
           }
         },
         element: <Preview/>,
+        errorElement: <div className='w-screen h-screen flex items-center justify-center'>页面错误，请关闭页面重新操作</div>,
       },
     ],
   },

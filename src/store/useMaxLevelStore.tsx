@@ -14,7 +14,7 @@ export const useMaxLevelStore = create<State & Actions>(set => ({
   positionOptions: [],
   setMaxLevel: maxLevel => set((state) => {
     const positionOptions = maxLevel !== 0
-      ? Array.from({ length: maxLevel + 1 }, (_, index) => {
+      ? Array.from({ length: maxLevel }, (_, index) => {
         if (index === 0) {
           return {
             label: '当前位置',

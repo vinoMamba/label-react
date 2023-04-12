@@ -8,8 +8,12 @@ import { useSchemaStore } from '../../store/useSchemaStore'
 export const LogoSetter = () => {
   const { search } = useLocation()
   const action = `${import.meta.env.VITE_API_URL}/upms/upload/multi`
+
+  // 获取 search 中的 auth 参数,search 为 ?auth=xxxxx&hasChanged=1
+  const searchParams = new URLSearchParams(search)
+  const auth = searchParams.get('auth')
   const headers = {
-    Authorization: `Bearer ${search.split('=')[1]}`,
+    Authorization: `Bearer ${auth}`,
     Accept: 'application/json, text/plain, */*',
   }
   const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
