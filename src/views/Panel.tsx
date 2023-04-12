@@ -89,8 +89,8 @@ export const Panel = () => {
       const moveY = (e.clientY - clientY) / scale
       const newContainer = {
         ...schema.container,
-        top: schema.container.top + moveY,
-        left: schema.container.left + moveX,
+        top: Math.ceil(schema.container.top + moveY),
+        left: Math.ceil(schema.container.left + moveX),
       }
       updateContainer(newContainer)
     }
@@ -110,6 +110,7 @@ export const Panel = () => {
       height: 50,
       top: 0,
       left: 0,
+      scale: 1,
     })
     resetScale()
   }

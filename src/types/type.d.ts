@@ -28,6 +28,7 @@ export interface Schema {
     height: number;
     top: number;
     left: number;
+    scale: number;
   };
   blocks: Block[];
 }

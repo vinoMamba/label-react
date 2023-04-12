@@ -6,6 +6,7 @@ export const labelSchema: Schema = {
     height: 50,
     top: 0,
     left: 0,
+    scale: 1,
   },
   blocks: [],
 }
