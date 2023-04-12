@@ -6,6 +6,7 @@ import { Print } from '../views/Print'
 import type { Label, labelInfo } from '../types/type'
 import { Panel } from '../views/Panel'
 import { App } from '../App'
+import { Preview } from '../views/Preview'
 
 export const routes = createHashRouter([
   {
@@ -46,8 +47,8 @@ export const routes = createHashRouter([
         loader: async ({ request }) => {
           const url = new URL(request.url)
           const auth = url.searchParams.get('auth')
-          const ids = url.searchParams.get('ids')
-          if (auth && ids) {
+          const ids = url.searchParams.get('ids') || ''
+          if (auth) {
             const result = await printLabel(auth, ids)
             const { data } = await result.json()
             const logoUrl = data?.logoUrl as string
@@ -71,6 +72,37 @@ export const routes = createHashRouter([
           }
         },
         element: <Print />,
+      },
+      {
+        path: 'preview',
+        loader: async ({ request }) => {
+          const url = new URL(request.url)
+          const auth = url.searchParams.get('auth')
+          const ids = url.searchParams.get('ids') || ''
+          if (auth) {
+            const result = await printLabel(auth, ids)
+            const { data } = await result.json()
+            const logoUrl = data?.logoUrl as string
+            const labelInfo = data.assetInfoList as labelInfo[]
+            await Promise.all(labelInfo.map(async (item) => {
+              item.qrCodeUrl = await toDataURL(item.qrCodeUrl || 'https://www.ahdingtalk.com/')
+            }))
+            const label = data?.assetLabel as Label
+            return {
+              logoUrl,
+              labelInfo,
+              label,
+            }
+          }
+          else {
+            return {
+              logoUrl: '',
+              labelInfo: [],
+              label: {},
+            }
+          }
+        },
+        element: <Preview/>,
       },
     ],
   },

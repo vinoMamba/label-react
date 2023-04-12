@@ -98,6 +98,7 @@ function createCustomLabel(labelList: labelInfo[], logoUrl: string, schema: Sche
           }
         }),
       }
+      console.log(neSchema)
       return (<PrintLabel key={label.assetInfoId} schema={neSchema} />)
     })
   }</>

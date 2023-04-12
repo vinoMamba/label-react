@@ -32,7 +32,6 @@ export const PrintLabel: FC<Props> = (props) => {
   function createBlock(block: Block) {
     switch (block.type) {
       case 'qrCode':
-        console.log(block)
         return <QrCodeRender value={block.props.value} width={block.options.width}
                                      height={block.options.height}
                 />
