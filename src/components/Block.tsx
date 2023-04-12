@@ -2,7 +2,6 @@ import type { FC, MouseEventHandler } from 'react'
 import { useEffect, useRef } from 'react'
 import { registerConfig } from '../core/registerConfig'
 import { useMarkLineStore } from '../store/useMarklineStore'
-import { useScaleStore } from '../store/useScaleStore'
 import { useSchemaStore } from '../store/useSchemaStore'
 import type { Block, DragState } from '../types/type'
 
@@ -17,7 +16,6 @@ export const BlockItem: FC<Props> = (props) => {
     left: props.block.options.left,
   }
   const currentBlockId = useRef<number | null>(null)
-  const scale = useScaleStore(state => state.scale)
   const [schema, updateBlock, clearAllFocus, deleteBlock, setCurrentBlock] = useSchemaStore(state => [
     state.schema,
     state.updateBlock,
@@ -38,8 +36,8 @@ export const BlockItem: FC<Props> = (props) => {
       ...props.block,
       options: {
         ...props.block.options,
-        width: Math.ceil(width / scale),
-        height: Math.ceil(height / scale),
+        width: Math.ceil(width / schema.container.scale),
+        height: Math.ceil(height / schema.container.scale),
       },
     })
   }, [])
@@ -136,9 +134,10 @@ export const BlockItem: FC<Props> = (props) => {
         clientX: moveX,
         clientY: moveY,
       } = e
-      let left = Math.ceil((moveX - drageState.current!.startX) / scale + drageState.current!.startLeft)
-      let top = Math.ceil((moveY - drageState.current!.startY) / scale + drageState.current!.startTop)
-      let x = 0; let y = 0
+      let left = Math.ceil((moveX - drageState.current!.startX) / schema.container.scale + drageState.current!.startLeft)
+      let top = Math.ceil((moveY - drageState.current!.startY) / schema.container.scale + drageState.current!.startTop)
+      let x = 0
+      let y = 0
       drageState.current!.marklineCollection.x.forEach((markline) => {
         if (Math.abs(markline.left - left) < 5) {
           x = markline.showLeft

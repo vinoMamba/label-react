@@ -10,7 +10,6 @@ import { registerConfig } from '../core/registerConfig'
 import { validateSchema } from '../core/schema'
 import { useFieldListStore } from '../store/useFieldListStore'
 import { useMarkLineStore } from '../store/useMarklineStore'
-import { useScaleStore } from '../store/useScaleStore'
 import { useSchemaStore } from '../store/useSchemaStore'
 import type { Block, Material, Schema } from '../types/type'
 import { StepCounter } from '../components/StepCounter'
@@ -29,7 +28,6 @@ export const Panel = () => {
   const currentMaterial = useRef<Material>()
   const [setFieldList] = useFieldListStore(state => [state.setFieldList])
   const [markLine] = useMarkLineStore(state => [state.markLine])
-  const [scale, resetScale] = useScaleStore(state => [state.scale, state.resetScale])
   const [schema, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore(state => [state.schema, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
 
   // 初始化字段列表以及标签信息
@@ -43,7 +41,7 @@ export const Panel = () => {
     border: '1px solid gray',
     width: `${schema.container.width}mm`,
     height: `${schema.container.height}mm`,
-    transform: `scale(${scale}) translate(${schema.container.left}px,${schema.container.top}px)`,
+    transform: `scale(${schema.container.scale}) translate(${schema.container.left}px,${schema.container.top}px)`,
   }
 
   function handleDragStart(material: any) {
@@ -85,12 +83,12 @@ export const Panel = () => {
     } = e
     clearAllFocus()
     const mousemove = (e: MouseEvent) => {
-      const moveX = (e.clientX - clientX) / scale
-      const moveY = (e.clientY - clientY) / scale
+      const moveX = Math.ceil((e.clientX - clientX) / schema.container.scale)
+      const moveY = Math.ceil((e.clientY - clientY) / schema.container.scale)
       const newContainer = {
         ...schema.container,
-        top: Math.ceil(schema.container.top + moveY),
-        left: Math.ceil(schema.container.left + moveX),
+        top: schema.container.top + moveY,
+        left: schema.container.left + moveX,
       }
       updateContainer(newContainer)
     }
@@ -112,7 +110,6 @@ export const Panel = () => {
       left: 0,
       scale: 1,
     })
-    resetScale()
   }
 
   async function save() {
