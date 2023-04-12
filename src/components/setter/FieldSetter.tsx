@@ -4,6 +4,7 @@ import { fontSizes } from '../../shared'
 import { useFieldListStore } from '../../store/useFieldListStore'
 import { useSchemaStore } from '../../store/useSchemaStore'
 import { useMaxLevelStore } from '../../store/useMaxLevelStore'
+import { StarIcon } from '../StarIcon'
 
 export const FieldSetter = () => {
   const [positionOptions] = useMaxLevelStore(state => [state.positionOptions])
@@ -66,7 +67,7 @@ export const FieldSetter = () => {
         <div>
             <h6 className="setter-h6">字段信息</h6>
             <Form>
-                <Form.Item label="字段名称" rules={[{ required: true }]}>
+                <Form.Item label={<StarIcon>字段名称</StarIcon>} rules={[{ required: true }]}>
                     <Select
                         labelInValue={true}
                         value={currentBlock!.props.fieldValue}

@@ -1,6 +1,7 @@
 import { Checkbox, Form, Input, Select } from 'antd'
 import { fontSizes } from '../../shared'
 import { useSchemaStore } from '../../store/useSchemaStore'
+import { StarIcon } from '../StarIcon'
 
 export const CustomTextSetter = () => {
   const [currentBlock, updateBlock] = useSchemaStore(state => [state.currentBlock, state.updateBlock])
@@ -35,7 +36,7 @@ export const CustomTextSetter = () => {
     <div>
       <h6 className="setter-h6">自定义文本框</h6>
       <Form>
-        <Form.Item label="文本内容" rules={[{ required: true }]}>
+        <Form.Item label={<StarIcon>文本内容</StarIcon>} rules={[{ required: true }]}>
           <Input placeholder="请输入文本内容" value={currentBlock!.props.text} onChange={handleInputChange} />
         </Form.Item>
         <Form.Item label="字段大小" rules={[{ required: true }]}>

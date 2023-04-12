@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { RcFile, UploadChangeParam, UploadFile, UploadProps } from 'antd/es/upload'
 import { useLocation } from 'react-router-dom'
 import { useSchemaStore } from '../../store/useSchemaStore'
+import { StarIcon } from '../StarIcon'
 
 export const LogoSetter = () => {
   const { search } = useLocation()
@@ -88,13 +89,13 @@ export const LogoSetter = () => {
     <div>
       <h6 className="setter-h6">公司Logo</h6>
       <Form>
-        <Form.Item label="宽度" rules={[{ required: true }]}>
+        <Form.Item label={<StarIcon>宽度</StarIcon>} rules={[{ required: true }]}>
           <div className="flex items-center">
             <InputNumber value={currentBlock!.options.width} onChange={widthChange} />
             <span className="ml-4">px</span>
           </div>
         </Form.Item>
-        <Form.Item label="高度" rules={[{ required: true }]}>
+        <Form.Item label={<StarIcon>高度</StarIcon>} rules={[{ required: true }]}>
           <div className="flex items-center">
             <InputNumber value={currentBlock!.options.height} onChange={heightChange} />
             <span className="ml-4">px</span>
