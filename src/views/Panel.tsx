@@ -1,6 +1,6 @@
 import { Button, message } from 'antd'
 import type { DragEventHandler, MouseEventHandler } from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { updateLabelInfo } from '../api'
 import { BlockItem } from '../components/Block'
@@ -30,20 +30,21 @@ export const Panel = () => {
   const [markLine] = useMarkLineStore(state => [state.markLine])
   const [schema, labelHasChanged, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore(state => [state.schema, state.labelHasChanged, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
 
-  // 监听标签信息是否发生变化,发生变化则更新 URL 中 hasChanged 参数值 为 1
+  // 监听标签信息是否发生变化,发生变化则向父窗口发送消息
   const firstRender = useRef(false)
   useEffect(() => {
     if (!firstRender.current) {
       firstRender.current = true
       return
     }
-    if (labelHasChanged) {
-      const url = new URL(window.location.href)
-      const newHash = url.hash.replace(/hasChanged=\d/, 'hasChanged=1')
-      url.hash = newHash
-      window.history.replaceState(null, '', url.href)
+    const hash = window.location.hash
+    if (hash.includes('save=1')) {
+      save()
     }
-  }, [labelHasChanged])
+    if (labelHasChanged) {
+      window.parent.postMessage({ type: 'labelHasChanged', data: true }, '*')
+    }
+  }, [labelHasChanged, window.location.hash])
   // 初始化字段列表以及标签信息
   useEffect(() => {
     setFieldList(loaderData.fieldList)
