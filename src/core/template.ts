@@ -19,6 +19,7 @@ export const template = `
       }
 
       section {
+        overflow: hidden;
         page-break-after: always;
         background-color: white;
       }

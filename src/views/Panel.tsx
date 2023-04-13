@@ -1,13 +1,13 @@
 import { Button, message } from 'antd'
 import type { DragEventHandler, MouseEventHandler } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { updateLabelInfo } from '../api'
 import { BlockItem } from '../components/Block'
 import { PanerHeader } from '../components/PanelHeader'
 import { Setter } from '../components/Setter'
 import { registerConfig } from '../core/registerConfig'
-import { validateSchema } from '../core/schema'
+import { labelSchema, validateSchema } from '../core/schema'
 import { useFieldListStore } from '../store/useFieldListStore'
 import { useMarkLineStore } from '../store/useMarklineStore'
 import { useSchemaStore } from '../store/useSchemaStore'
@@ -126,7 +126,10 @@ export const Panel = () => {
       scale: 1,
     })
   }
-
+  function resetPanel() {
+    updateSchema(labelSchema)
+    save()
+  }
   async function save() {
     if (validateSchema(schema)) {
       try {
@@ -173,6 +176,7 @@ export const Panel = () => {
                         className="relative h[calc(100vh-144px)] flex-1  overflow-auto flex justify-center items-center"
                     >
                         <div className="absolute right-20 top-20 flex gap-8 z-10">
+                            <Button onClick={resetPanel}>清空模板</Button>
                             <PreviewModal/>
                             <Button onClick={resetPanelState}>重置</Button>
                             <StepCounter/>

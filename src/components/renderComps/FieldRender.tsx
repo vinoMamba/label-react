@@ -9,12 +9,17 @@ interface Props {
   printFieldValue: string
 }
 export const FieldRender: FC<Props> = (props) => {
+  const style = {
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    fontSize: `${props.fontSize || 14}px`,
+    fontWeight: props.bold ? 'bold' : 'normal',
+  }
   return (
         <span
-            style={{
-              fontSize: `${props.fontSize || 14}px`,
-              fontWeight: props.bold ? 'bold' : 'normal',
-            }}
+            style={style as any}
             className="p-0 m-0 overflow-hidden whitespace-nowrap cursor-default"
         >
           {props.printFieldValue

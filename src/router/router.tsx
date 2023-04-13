@@ -21,7 +21,6 @@ export const routes = createHashRouter([
           if (auth) {
             const result = await getFieldList(auth)
             const { data: fieldList } = await result.json()
-
             const label = await getLabelInfo(auth)
             const { data: labelData } = await label.json()
             const labelFieldStr = labelData?.labelField as string
