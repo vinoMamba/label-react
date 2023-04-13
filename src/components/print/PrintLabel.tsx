@@ -12,6 +12,7 @@ interface Props {
 export const PrintLabel: FC<Props> = (props) => {
   const { schema } = props
   const style = {
+    overflow: 'hidden',
     border: '1px solid #d4d4d4',
     position: 'relative',
     width: `${schema.container.width}mm`,

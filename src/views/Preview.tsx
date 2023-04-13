@@ -3,12 +3,49 @@ import type { CreateLabelParams } from '../core/print'
 import { TemplateOne } from '../components/print/TemplateOne'
 import { TemplateTwo } from '../components/print/TemplateTwo'
 import { PrintLabel } from '../components/print/PrintLabel'
+import { labelSchema } from '../core/schema'
+import type { Block } from '../types/type'
 
 export const Preview = () => {
   const { logoUrl, label, labelInfo } = useLoaderData() as CreateLabelParams
   function createPreview() {
     const type = label.labelType
-    const schema = label.labelField ? JSON.parse(label.labelField) : {}
+    const schema = label.labelField ? JSON.parse(label.labelField) : labelSchema
+    const newSchema = {
+      ...schema,
+      blocks: schema.blocks.map((block: Block) => {
+        switch (block.type) {
+          case 'qrCode':
+            return {
+              ...block,
+              props: {
+                ...block.props,
+                value: labelInfo[0].qrCodeUrl,
+              },
+            }
+          case 'field':
+            return {
+              ...block,
+              props: {
+                ...block.props,
+                printFieldValue: labelInfo[0].assetLabelFieldList.find(item => item.fieldName === block.props.fieldName)?.fieldValue,
+              },
+            }
+          case 'logo':
+            console.log(block)
+            return {
+              ...block,
+              props: {
+                ...block.props,
+                url: logoUrl,
+              },
+            }
+          default:
+            return block
+        }
+      }),
+    }
+
     switch (type) {
       case 1:
         return <TemplateOne
@@ -22,13 +59,13 @@ export const Preview = () => {
       case 3:
         return <TemplateTwo type={type} qrCodeUrl={labelInfo[0].qrCodeUrl} width={label.labelWidth} fieldValue={labelInfo[0].assetLabelFieldList[0].fieldValue}/>
       case 4:
-        return <PrintLabel schema={schema}/>
+        return <PrintLabel schema={newSchema}/>
       default:
         return <div>打印标签不见了</div>
     }
   }
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div style={{ overflow: 'hidden' }} className="w-screen h-screen flex items-center justify-center overflow-hidden">
       {createPreview()}
     </div>
   )
