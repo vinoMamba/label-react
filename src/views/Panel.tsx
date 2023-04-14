@@ -28,7 +28,7 @@ export const Panel = () => {
   const currentMaterial = useRef<Material>()
   const [setFieldList] = useFieldListStore(state => [state.setFieldList])
   const [markLine] = useMarkLineStore(state => [state.markLine])
-  const [schema, labelHasChanged, pushBlock, clearAllFocus, updateContainer, updateSchema] = useSchemaStore(state => [state.schema, state.labelHasChanged, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema])
+  const [schema, labelHasChanged, pushBlock, clearAllFocus, updateContainer, updateSchema, updateLabelHasChanged] = useSchemaStore(state => [state.schema, state.labelHasChanged, state.pushBlock, state.clearAllFocus, state.updateContainer, state.updateSchema, state.updateLabelHasChanged])
 
   // 监听标签信息是否发生变化,发生变化则向父窗口发送消息
   const firstRender = useRef(false)
@@ -134,6 +134,7 @@ export const Panel = () => {
         const data = await updateLabelInfo(loaderData.auth, schema)
         if (data.status === 200) {
           messageApi.success('保存成功')
+          updateLabelHasChanged(false)
         }
         else {
           messageApi.error('保存失败')
