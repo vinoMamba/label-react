@@ -11,8 +11,7 @@ interface Props {
 
 export const BlockItem: FC<Props> = (props) => {
   const blockStyle = {
-    lineHeight: 'none',
-    border: props.block.focus ? '1px solid #1890ff' : '1px solid #f0f0f0',
+    border: props.block.focus ? '1px solid #1890ff' : '1px solid white',
     top: props.block.options.top,
     left: props.block.options.left,
   }

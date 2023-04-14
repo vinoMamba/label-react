@@ -10,11 +10,11 @@ interface Props {
 }
 export const FieldRender: FC<Props> = (props) => {
   const style = {
-    display: 'inline-block',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     fontSize: `${props.fontSize || 14}px`,
+    lineHeight: `${props.fontSize || 14}px`,
     fontWeight: props.bold ? 'bold' : 'normal',
   }
   return (
@@ -22,7 +22,7 @@ export const FieldRender: FC<Props> = (props) => {
             style={style as any}
             className="p-0 m-0 overflow-hidden whitespace-nowrap cursor-default"
         >
-          {props.printFieldValue
+          {props.printFieldValue !== undefined
             ? props.hideTitle ? props.printFieldValue : `${props.fieldName || '字段名称'}：${props.printFieldValue || ''}`
             : props.hideTitle ? 'XXXXXX' : `${props.fieldName || '字段名称'}：XXXXXX`
           }
