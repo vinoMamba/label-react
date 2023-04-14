@@ -126,8 +126,8 @@ export const Panel = () => {
   }
   function resetPanel() {
     updateSchema(labelSchema)
-    save()
   }
+
   async function save() {
     if (validateSchema(schema)) {
       try {

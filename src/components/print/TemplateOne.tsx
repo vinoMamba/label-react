@@ -1,9 +1,11 @@
 import type { FC } from 'react'
 interface Props {
+  fontSize: number
   logoUrl: string
   qrCodeUrl: string
   width: number
   height: number
+  showField: boolean
   list: Array<{
     fieldName: string
     fieldValue: string
@@ -33,7 +35,11 @@ export const TemplateOne: FC<Props> = (props) => {
   }
   const logoStyle = {
     width: `${height}mm`,
-    height: `${height / 4 - 5}mm`,
+    height: `${height / 2 - 5}mm`,
+  }
+  const fieldStyle = {
+    fontSize: `${props.fontSize}px`,
+    marginTop: '8px',
   }
   return (
     <section
@@ -49,8 +55,8 @@ export const TemplateOne: FC<Props> = (props) => {
         }
         {list.map((item) => {
           return (
-          <div key={item.fieldName}>
-            <span>{item.fieldName}</span>
+          <div style={fieldStyle} key={item.fieldName}>
+            {props.showField && <span>{item.fieldName}：</span>}
             <span>{item.fieldValue}</span>
           </div>
           )

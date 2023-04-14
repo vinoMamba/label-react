@@ -13,7 +13,10 @@ export const Preview = () => {
 
     switch (type) {
       case 1:
+
         return <TemplateOne
+          fontSize={label.fontSize}
+          showField={label.showField === 1}
           logoUrl={logoUrl || ''}
           qrCodeUrl={labelInfo[0].qrCodeUrl}
           width={label.labelWidth}
@@ -46,7 +49,6 @@ export const Preview = () => {
                   },
                 }
               case 'logo':
-                console.log(block)
                 return {
                   ...block,
                   props: {

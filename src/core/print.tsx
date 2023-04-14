@@ -48,6 +48,8 @@ function createTemplateOne(labelList: labelInfo[], logoUrl: string, label: Label
   const List = () => <>{
     labelList.map((item) => {
       return (<TemplateOne
+        fontSize={label.fontSize}
+        showField={label.showField === 1}
         qrCodeUrl={item.qrCodeUrl}
         key={item.assetInfoId}
         logoUrl={logoUrl}
@@ -86,7 +88,6 @@ function createCustomLabel(labelList: labelInfo[], logoUrl: string, schema: Sche
                 },
               }
             case 'logo':
-              console.log(block)
               return {
                 ...block,
                 props: {

@@ -36,7 +36,6 @@ export const Print = () => {
     iframe.style.display = 'none'
     document.body.appendChild(iframe)
     iframe.contentWindow?.document.write(template)
-    console.log(template)
     await getLoadPromise(iframe)
     iframe.contentWindow?.print()
     document.body.removeChild(iframe)
