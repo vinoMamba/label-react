@@ -42,14 +42,14 @@ export const TemplateOne: FC<Props> = (props) => {
           <img src={qrCodeUrl} alt="" width='100%' height='100%' />
       </div>
       <div style={rightStyle as any}>
-        {list.map((item) => {
-          return (
-          <div key={item.fieldName}>
-            {logoUrl
+        {logoUrl
             && <div style={logoStyle}>
               <img src={logoUrl} alt="" width='100%' height='100%' />
             </div>
-            }
+        }
+        {list.map((item) => {
+          return (
+          <div key={item.fieldName}>
             <span>{item.fieldName}</span>
             <span>{item.fieldValue}</span>
           </div>

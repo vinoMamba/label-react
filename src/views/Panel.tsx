@@ -41,9 +41,7 @@ export const Panel = () => {
     if (hash.includes('save=1')) {
       save()
     }
-    if (labelHasChanged) {
-      window.parent.postMessage({ type: 'labelHasChanged', data: true }, '*')
-    }
+    window.parent.postMessage({ type: 'labelHasChanged', data: labelHasChanged }, '*')
   }, [labelHasChanged, window.location.hash])
   // 初始化字段列表以及标签信息
   useEffect(() => {

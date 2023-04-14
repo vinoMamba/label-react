@@ -23,7 +23,7 @@ export const FieldRender: FC<Props> = (props) => {
             className="p-0 m-0 overflow-hidden whitespace-nowrap cursor-default"
         >
           {props.printFieldValue
-            ? props.hideTitle ? 'XXXXXX' : `${props.fieldName || '字段名称'}：${props.printFieldValue || 'XXXXXX'}`
+            ? props.hideTitle ? props.printFieldValue : `${props.fieldName || '字段名称'}：${props.printFieldValue || ''}`
             : props.hideTitle ? 'XXXXXX' : `${props.fieldName || '字段名称'}：XXXXXX`
           }
     </span>

@@ -11,6 +11,7 @@ interface Props {
 
 export const BlockItem: FC<Props> = (props) => {
   const blockStyle = {
+    lineHeight: 'none',
     border: props.block.focus ? '1px solid #1890ff' : '1px solid #f0f0f0',
     top: props.block.options.top,
     left: props.block.options.left,
@@ -122,13 +123,13 @@ export const BlockItem: FC<Props> = (props) => {
       let x = 0
       let y = 0
       drageState.current!.marklineCollection.x.forEach((markline) => {
-        if (Math.abs(markline.left - left) < 5) {
+        if (Math.abs(markline.left - left) < 2) {
           x = markline.showLeft
           left = markline.left
         }
       })
       drageState.current!.marklineCollection.y.forEach((markline) => {
-        if (Math.abs(markline.top - top) < 5) {
+        if (Math.abs(markline.top - top) < 2) {
           y = markline.showTop
           top = markline.top
         }
