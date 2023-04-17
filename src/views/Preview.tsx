@@ -1,13 +1,20 @@
 import { useLoaderData } from 'react-router-dom'
+import { useEffect } from 'react'
 import type { CreateLabelParams } from '../core/print'
 import { TemplateOne } from '../components/print/TemplateOne'
 import { TemplateTwo } from '../components/print/TemplateTwo'
 import { PrintLabel } from '../components/print/PrintLabel'
 import { labelSchema } from '../core/schema'
 import type { Block } from '../types/type'
+import { mmToPx } from '../shared'
 
 export const Preview = () => {
   const { logoUrl, label, labelInfo } = useLoaderData() as CreateLabelParams
+  useEffect(() => {
+    const height = mmToPx(label.labelHeight + 10)
+    const width = mmToPx(label.labelWidth + 10)
+    window.parent.postMessage({ type: 'labelInfo', data: [width, height] }, '*')
+  }, [])
   function createPreview() {
     const type = label.labelType
 
@@ -67,7 +74,14 @@ export const Preview = () => {
     }
   }
   return (
-    <div style={{ overflow: 'hidden' }} className="w-screen h-screen flex items-center justify-center overflow-hidden">
+    <div style={{
+      overflow: 'hidden',
+      width: mmToPx(label.labelWidth + 10),
+      height: mmToPx(label.labelHeight + 10),
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
       {createPreview()}
     </div>
   )
