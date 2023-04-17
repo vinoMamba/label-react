@@ -30,9 +30,9 @@ export const Preview = () => {
           list={labelInfo[0].assetLabelFieldList}
           height={label.labelHeight}/>
       case 2:
-        return <TemplateTwo type={type} qrCodeUrl={labelInfo[0].qrCodeUrl} width={label.labelWidth} fieldValue={labelInfo[0].assetLabelFieldList[0].fieldValue}/>
+        return <TemplateTwo type={type} qrCodeUrl={labelInfo[0].qrCodeUrl} width={label.labelWidth} fieldValue={labelInfo[0].assetLabelFieldList.length > 0 ? labelInfo[0].assetLabelFieldList[0].fieldValue : ''}/>
       case 3:
-        return <TemplateTwo type={type} qrCodeUrl={labelInfo[0].qrCodeUrl} width={label.labelWidth} fieldValue={labelInfo[0].assetLabelFieldList[0].fieldValue}/>
+        return <TemplateTwo type={type} qrCodeUrl={labelInfo[0].qrCodeUrl} width={label.labelWidth} fieldValue={labelInfo[0].assetLabelFieldList.length > 0 ? labelInfo[0].assetLabelFieldList[0].fieldValue : ''}/>
       case 4:
         const schema = label.labelField ? JSON.parse(label.labelField) : labelSchema
         const newSchema = {

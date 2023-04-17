@@ -17,12 +17,13 @@ export const getLabelInfo = (auth: string) => fetch('/api/asset/label/label_info
 })
 
 export const updateLabelInfo = (auth: string, schema: Schema) => {
+  const { width, height } = schema.container || { width: 100, height: 50 }
   const data = {
     labelType: '4',
     labelField: JSON.stringify(schema),
     fontSize: '14',
-    labelWidth: '100',
-    labelHeight: '100',
+    labelWidth: width,
+    labelHeight: height,
     showField: '0',
   }
   return fetch('/api/asset/label', {
